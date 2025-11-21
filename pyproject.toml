@@ -3,7 +3,7 @@ name = "er"
 version = "0.1.0"
 description = "Swarm robotics simulation"
 requires-python = ">=3.13"
-dependencies = ["numpy", "matplotlib"]
+dependencies = ["pygame", "pyyaml", "numpy", "matplotlib"]
 
 [dependency-groups]
 dev = ["ruff"]
