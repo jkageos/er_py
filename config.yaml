@@ -1,0 +1,30 @@
+# Task 05: Ackley Problem Optimization
+
+# Search space bounds
+ackley:
+  x_min: -32.768
+  x_max: 32.768
+  y_min: -32.768
+  y_max: 32.768
+  z_min: -32.768
+  z_max: 32.768
+
+# Evolutionary algorithm parameters
+ea:
+  population_size: 100
+  generations: 500
+  mutation_rate: 0.1
+  elitism: true
+  tournament_size: 2
+  gaussian_std: 2.0
+
+# Mutation rate sweep parameters
+parameter_sweep:
+  mutation_rates: [0.02, 0.05, 0.1, 0.2, 0.4]
+  n_runs_per_setting: 5
+  
+# Output and logging
+output:
+  print_every: 50
+  plots_dir: "plots"
+  dpi: 150
