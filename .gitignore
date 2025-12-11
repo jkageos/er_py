@@ -2,6 +2,7 @@
 plots/
 capture/
 measurements/
+data/
 
 # Virtual environment (UV)
 .venv/
