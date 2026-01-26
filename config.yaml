@@ -22,7 +22,37 @@ ea:
 parameter_sweep:
   mutation_rates: [0.02, 0.05, 0.1, 0.2, 0.4]
   n_runs_per_setting: 5
-  
+
+# Task 09: Ring Problem parameters
+ring:
+  cells_per_half: 20
+
+  # Evolutionary algorithm parameters
+  ea:
+    population_size: 80 # Increased from 100
+    max_generations: 200 # Increased from 500
+    target_fitness: 0.99
+    mutation_rate: 0.1
+    mutation_std: 0.7
+    elite_size: 2 # 1% to 5% of population size
+
+  # Fitness evaluation parameters
+  fitness:
+    num_trials: 20
+    steps_per_trial: 300
+    threshold: 0.5
+
+  # Output parameters
+  output:
+    print_every: 10
+    test_start_positions: [0, 10, 20, 30]
+    trajectory_steps: 200
+
+# Parallel processing parameters
+parallel:
+  enabled: true
+  n_workers: null # null for auto-detect (CPU count - 1)
+
 # Output and logging
 output:
   print_every: 50
