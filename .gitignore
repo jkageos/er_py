@@ -1,8 +1,10 @@
 # Project outputs
-plots/
 capture/
 measurements/
 data/
+examples/
+plots/
+results/
 
 # Virtual environment (UV)
 .venv/
@@ -38,3 +40,6 @@ htmlcov/
 
 # Logs
 *.log
+
+# Guides
+*[Gg][Uu][Ii][Dd][Ee]*

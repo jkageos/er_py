@@ -29,12 +29,12 @@ ring:
 
   # Evolutionary algorithm parameters
   ea:
-    population_size: 80 # Increased from 100
-    max_generations: 200 # Increased from 500
+    population_size: 80
+    max_generations: 200
     target_fitness: 0.99
     mutation_rate: 0.1
     mutation_std: 0.7
-    elite_size: 2 # 1% to 5% of population size
+    elite_size: 2
 
   # Fitness evaluation parameters
   fitness:
@@ -51,10 +51,76 @@ ring:
 # Parallel processing parameters
 parallel:
   enabled: true
-  n_workers: null # null for auto-detect (CPU count - 1)
+  n_workers: null # null for auto-detect
 
 # Output and logging
 output:
-  print_every: 50
+  print_every: 5
   plots_dir: "plots"
+  dpi: 150
+
+# Task 11: Maze Exploration with Novelty Search
+task11:
+  # Environment parameters
+  environment:
+    width: 1200
+    height: 1000
+    robot_radius: 10.0
+    max_sensor_range: 200.0 # INCREASED: was 100, now 200 for better lookahead
+    eval_steps: auto
+    max_speed: auto
+    maze_cols: 12
+    maze_rows: 10
+    wall_thickness: 8.0
+    seed: 42
+    physics:
+      mass: 1.0
+      friction: 0.5
+      elasticity: 0.1
+      damping: 0.95
+      iterations: 10
+    lidar:
+      num_rays: 5 # INCREASED: was 3, now 5 for better spatial awareness
+
+  # Evolutionary algorithm parameters
+  evolution:
+    population_size: 150
+    n_generations: 50
+    n_hidden: 8
+    n_hidden_layers: 2
+    mutation_rate: 0.4
+    mutation_sigma: 0.8
+    tournament_size: 3
+    elitism: 3
+    iso_sigma: 0.02
+    line_sigma: 0.2
+    use_cmaes: true
+    num_emitters: 5
+    emitter_batch_size: 30
+    restart_threshold: 0.01
+
+  # Novelty search parameters
+  novelty:
+    archive_threshold: 0.02
+    k_nearest: 15
+    target_add_rate: 0.2
+    adapt_rate: 0.05
+    min_threshold: 0.005
+    max_threshold: 0.1
+    archive_max_size: 10000
+    use_extended_behavior: true
+
+  # Rendering
+  rendering:
+    enabled: false
+    render_every: 1
+
+  # Output parameters
+  output:
+    plots_dir: "plots"
+    results_dir: "results"
+    print_every: 1
+
+# Global settings
+global:
   dpi: 150

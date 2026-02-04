@@ -3,7 +3,7 @@ name = "er"
 version = "0.1.0"
 description = "Evolutionary robotics assignments"
 requires-python = ">=3.13"
-dependencies = ["pygame", "pyyaml", "numpy", "matplotlib"]
+dependencies = ["pygame", "pyyaml", "numpy", "matplotlib", "pymunk"]
 
 [dependency-groups]
 dev = ["ruff"]

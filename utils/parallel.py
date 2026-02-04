@@ -1,9 +1,19 @@
 """Parallel processing utilities for evolutionary algorithms."""
 
 import multiprocessing as mp
+import signal
 from typing import Any, Callable, List, Optional
 
 __all__ = ["parallel_map", "get_optimal_workers"]
+
+
+def _init_worker() -> None:
+    """Initialize worker process to ignore SIGINT.
+
+    This ensures Ctrl+C is only handled by the main process,
+    allowing for graceful shutdown.
+    """
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 
 def get_optimal_workers(max_workers: Optional[int] = None) -> int:
@@ -57,7 +67,14 @@ def parallel_map(
     if chunksize is None:
         chunksize = max(1, len(items) // (n_workers * 4))
 
-    with mp.Pool(processes=n_workers) as pool:
-        results = pool.map(func, items, chunksize=chunksize)
+    # Use initializer to make workers ignore SIGINT
+    with mp.Pool(processes=n_workers, initializer=_init_worker) as pool:
+        try:
+            results = pool.map(func, items, chunksize=chunksize)
+        except KeyboardInterrupt:
+            # If interrupted, terminate workers and re-raise
+            pool.terminate()
+            pool.join()
+            raise
 
     return results
